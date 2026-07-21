@@ -155,8 +155,15 @@ def process_audio():
 @app.route("/audio/<filename>")
 def get_audio(filename):
     path = os.path.join(UPLOAD_FOLDER, filename)
+
+    if not os.path.exists(path):
+        return jsonify({"error": "Audio file not found"}), 404
+
     return send_file(path, mimetype="audio/mpeg")
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
+    app.run(
+        host="0.0.0.0",
+        port=int(os.environ.get("PORT", 5000))
+    )
