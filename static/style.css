@@ -1,0 +1,363 @@
+/* ============================================================
+   DESIGN TOKENS
+   ============================================================ */
+:root {
+  --bg:            #0F1720;
+  --panel:         #161F2B;
+  --panel-raised:  #1C2733;
+  --border:        rgba(242, 239, 233, 0.08);
+  --border-strong: rgba(242, 239, 233, 0.16);
+
+  --text-primary:  #F2EFE9;
+  --text-muted:    #8A97A3;
+
+  --amber:         #E8A33D;
+  --amber-dim:     rgba(232, 163, 61, 0.15);
+  --teal:          #4FD1C5;
+  --teal-dim:      rgba(79, 209, 197, 0.15);
+
+  --font-display:  'Space Grotesk', sans-serif;
+  --font-body:     'Inter', sans-serif;
+  --font-mono:     'JetBrains Mono', monospace;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--bg);
+  background-image:
+    radial-gradient(circle at 20% 0%, rgba(232, 163, 61, 0.06), transparent 45%),
+    radial-gradient(circle at 80% 100%, rgba(79, 209, 197, 0.06), transparent 45%);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 48px 20px;
+}
+
+/* ============================================================
+   CONSOLE PANEL
+   ============================================================ */
+.console {
+  width: 100%;
+  max-width: 540px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 32px;
+  box-shadow: 0 30px 60px -20px rgba(0,0,0,0.5);
+}
+
+.console__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 36px;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.brand__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--teal);
+  box-shadow: 0 0 8px var(--teal);
+}
+
+.brand__name {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  color: var(--text-muted);
+}
+
+.stack-badge {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.06em;
+  color: var(--amber);
+  background: var(--amber-dim);
+  border: 1px solid rgba(232, 163, 61, 0.25);
+  padding: 5px 10px;
+  border-radius: 20px;
+}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero h1 {
+  font-family: var(--font-display);
+  font-size: 40px;
+  line-height: 1.08;
+  font-weight: 700;
+  margin: 0 0 14px 0;
+  letter-spacing: -0.01em;
+}
+
+.hero__sub {
+  color: var(--text-muted);
+  font-size: 14.5px;
+  line-height: 1.5;
+  max-width: 400px;
+  margin: 0 0 36px 0;
+}
+
+/* ============================================================
+   MIC BUTTON + WAVEFORM
+   ============================================================ */
+.mic-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 12px 0 32px 0;
+}
+
+.mic-btn {
+  position: relative;
+  width: 128px;
+  height: 128px;
+  border-radius: 50%;
+  border: 1px solid var(--border-strong);
+  background: radial-gradient(circle at 35% 30%, var(--panel-raised), var(--panel));
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.15s ease;
+}
+
+.mic-btn:hover {
+  transform: translateY(-2px);
+  border-color: var(--amber);
+}
+
+.mic-btn:active {
+  transform: translateY(0);
+}
+
+.mic-btn__icon {
+  font-size: 34px;
+  filter: grayscale(0.3);
+  transition: opacity 0.2s ease;
+}
+
+.mic-btn.recording {
+  border-color: var(--teal);
+  box-shadow: 0 0 0 8px var(--teal-dim), 0 0 40px rgba(79, 209, 197, 0.25);
+}
+
+.mic-btn.recording .mic-btn__icon {
+  opacity: 0;
+}
+
+.waveform {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.mic-btn.recording .waveform {
+  opacity: 1;
+}
+
+.waveform span {
+  width: 3px;
+  height: 6px;
+  border-radius: 2px;
+  background: var(--teal);
+  animation: wave 1s ease-in-out infinite;
+}
+
+.waveform span:nth-child(1) { animation-delay: 0.0s; }
+.waveform span:nth-child(2) { animation-delay: 0.1s; }
+.waveform span:nth-child(3) { animation-delay: 0.2s; }
+.waveform span:nth-child(4) { animation-delay: 0.3s; }
+.waveform span:nth-child(5) { animation-delay: 0.4s; }
+.waveform span:nth-child(6) { animation-delay: 0.3s; }
+.waveform span:nth-child(7) { animation-delay: 0.2s; }
+.waveform span:nth-child(8) { animation-delay: 0.1s; }
+.waveform span:nth-child(9) { animation-delay: 0.0s; }
+
+@keyframes wave {
+  0%, 100% { height: 6px; }
+  50% { height: 28px; }
+}
+
+.status {
+  margin-top: 18px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  color: var(--text-muted);
+}
+
+/* ============================================================
+   PIPELINE STAGE INDICATOR
+   ============================================================ */
+.pipeline {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 32px;
+}
+
+.stage {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--panel-raised);
+  transition: border-color 0.25s ease, background 0.25s ease;
+}
+
+.stage__index {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-muted);
+}
+
+.stage__label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+}
+
+.stage.active {
+  border-color: var(--amber);
+  background: var(--amber-dim);
+}
+
+.stage.active .stage__index,
+.stage.active .stage__label {
+  color: var(--amber);
+}
+
+.stage.done {
+  border-color: var(--teal);
+}
+
+.stage.done .stage__index,
+.stage.done .stage__label {
+  color: var(--teal);
+}
+
+.stage__connector {
+  width: 20px;
+  height: 1px;
+  background: var(--border-strong);
+}
+
+/* ============================================================
+   SESSION LOG
+   ============================================================ */
+.log {
+  background: var(--panel-raised);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 18px;
+}
+
+.log__header {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+.log__body {
+  min-height: 60px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.log__empty {
+  font-family: var(--font-mono);
+  font-size: 12.5px;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.log__line {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1.6;
+  margin: 0;
+  padding-left: 14px;
+  border-left: 2px solid var(--border-strong);
+}
+
+.log__line.user {
+  border-left-color: var(--amber);
+  color: var(--text-primary);
+}
+
+.log__line.bot {
+  border-left-color: var(--teal);
+  color: var(--text-primary);
+}
+
+.log__line .tag {
+  color: var(--text-muted);
+  margin-right: 8px;
+}
+
+#audioPlayer {
+  width: 100%;
+  margin-top: 16px;
+  display: none;
+  height: 36px;
+}
+
+#audioPlayer.visible {
+  display: block;
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.console__footer {
+  margin-top: 24px;
+  font-size: 11.5px;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+/* ============================================================
+   ACCESSIBILITY + RESPONSIVE
+   ============================================================ */
+.mic-btn:focus-visible,
+#recordBtn:focus-visible {
+  outline: 2px solid var(--teal);
+  outline-offset: 4px;
+}
+
+@media (max-width: 480px) {
+  .console { padding: 24px 20px; }
+  .hero h1 { font-size: 32px; }
+  .pipeline { gap: 6px; }
+  .stage__connector { width: 10px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .waveform span { animation: none; height: 14px; }
+  .mic-btn { transition: none; }
+}
