@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Voice Assistant — Console</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+  <div class="console">
+
+    <header class="console__header">
+      <div class="brand">
+        <span class="brand__dot"></span>
+        <span class="brand__name">VOICE ASSISTANT</span>
+      </div>
+      <div class="stack-badge">WHISPER &nbsp;·&nbsp; GEMINI &nbsp;·&nbsp; gTTS</div>
+    </header>
+
+    <section class="hero">
+      <h1>Speak.<br>It listens.<br>It answers.</h1>
+      <p class="hero__sub">A three-stage voice pipeline running entirely through your microphone — no typing required.</p>
+    </section>
+
+    <section class="mic-section">
+      <button id="recordBtn" class="mic-btn" aria-label="Start recording">
+        <span class="mic-btn__icon">🎙</span>
+        <div class="waveform" id="waveform">
+          <span></span><span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span>
+        </div>
+      </button>
+      <p id="status" class="status">Press to speak</p>
+    </section>
+
+    <section class="pipeline">
+      <div class="stage" id="stage-listen">
+        <span class="stage__index">01</span>
+        <span class="stage__label">LISTEN</span>
+      </div>
+      <div class="stage__connector"></div>
+      <div class="stage" id="stage-think">
+        <span class="stage__index">02</span>
+        <span class="stage__label">THINK</span>
+      </div>
+      <div class="stage__connector"></div>
+      <div class="stage" id="stage-speak">
+        <span class="stage__index">03</span>
+        <span class="stage__label">SPEAK</span>
+      </div>
+    </section>
+
+    <section class="log" id="log">
+      <div class="log__header">
+        <span>SESSION LOG</span>
+      </div>
+      <div class="log__body" id="logBody">
+        <p class="log__empty">Transcript will appear here once you speak.</p>
+      </div>
+      <audio id="audioPlayer" controls></audio>
+    </section>
+
+    <footer class="console__footer">
+      Built with a Whisper ASR model, the Gemini API, and gTTS — deployed locally with Flask.
+    </footer>
+
+  </div>
+
+  <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
