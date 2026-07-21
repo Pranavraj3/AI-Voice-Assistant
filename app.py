@@ -93,7 +93,7 @@ chat = client.chats.create(
 # LOAD MODELS (this happens once, when the server starts)
 # ---------------------------------------------------------------
 print("Loading Whisper model (speech-to-text)... this may take a minute the first time.")
-stt_model = whisper.load_model("tiny")  # options: tiny, base, small (bigger = slower but more accurate)
+stt_model = whisper.load_model("base")  # options: tiny, base, small (bigger = slower but more accurate)
 
 print("Models loaded. Server is ready!")
 
